@@ -13,6 +13,11 @@ import { AngularFireModule } from '@angular/fire';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { SigninComponent } from './auth/signin/signin.component';
+import { SignupComponent } from './auth/signup/signup.component';
+import { AdminComponent } from './admin/admin.component';
+import { HomeComponent } from './admin/home/home.component';
+import { AngularFireAuthModule } from '@angular/fire/auth';
 
 @NgModule({
   declarations: [
@@ -22,6 +27,10 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     FooterComponent,
     CarouselComponent,
     NewsComponent,
+    SigninComponent,
+    SignupComponent,
+    AdminComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +38,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AngularFireAuthModule
   ],
   providers: [],
   bootstrap: [AppComponent]
