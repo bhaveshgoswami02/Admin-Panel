@@ -12,6 +12,7 @@ export class NewsComponent implements OnInit {
   imageUrl=[]
   imagePath:any
   imageEvent:any
+  Previews=[]
   constructor() { }
 
   ngOnInit(): void {
@@ -36,4 +37,30 @@ export class NewsComponent implements OnInit {
     this.imageEvent = event.target.files[0]
   }
 
+
+  galleryImg(event){
+    // if(e.target.files){
+    //   for(let i=0; i<=File.length; i++){
+    //     console.log(i)
+    //     var reader = new FileReader();
+    //     reader.readAsDataURL(e.target.files[i]);
+    //     reader.onload=(events:any)=>{
+    //       this.Previews.push(events.target.result)
+    //     }
+    //   }
+    // }
+      if (event.target.files && event.target.files[0]) {
+  
+          var filesAmount = event.target.files.length;
+  
+          for (let i = 0; i < filesAmount; i++) {
+            var reader = new FileReader();
+            reader.onload = (event:any) => {
+              // console.log(event.target.result);
+                this.Previews.push(event.target.result)
+            }
+            reader.readAsDataURL(event.target.files[i]);
+          }
+      }
+    }
 }

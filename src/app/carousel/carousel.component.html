@@ -20,4 +20,26 @@
             </form>
         </div>
     </div>
+    <div class="row my-3">
+        <div class="col-lg-12">
+            <table class="table table-responsive-lg">
+                <thead>
+                  <tr>
+                    <th scope="col">Sr. No.</th>
+                    <th scope="col">Image</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of RecieveCarousel;let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td><img src="{{item.carouselUrl}}" width="50px" height="50px" style="border-radius: 50%;"></td>
+                    <td>Carousel {{i+1}}</td>
+                    <td><button class="btn btn-danger" (click)="onDelete(item.id,item.carouselPath)" ><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
 </div>

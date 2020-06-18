@@ -1,10 +1,10 @@
-<div class="container mt-5 bg-white rounded p-3">
+<div class="container ">
     <div class="row">
-        <div class="col-lg-2 mt-5 ">
+        <div class="col-lg-2 mt-5">
             <p style="border-bottom: 2px solid #333; color: #333; font-size: 20px; font-weight: 700;">Add News</p>
         </div>
     </div>
-    <div class="col-lg-12">
+    <div class="col-lg-12 mt-5 p-3 bg-white rounded">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Title</a>
@@ -48,14 +48,19 @@
                     </div>
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                         <div class="card-body border">
-                            <div class="col-lg-4">
-                                <h5>Select Gallery Image</h5>
-                                <img [src]="imgSrc" width="50%" height="150px" (click)="fileUploader.click()"><br>
-                                <label>Select Gallery Image to upload</label><br>
-                                <input type="file" #fileUploader (change)="coverImg($event)" name="CoverImage" ngModel><br><br>
+                            <div class="row">
+                                <div class="col-lg-4">
+                                    <h5>Select Gallery Image</h5>
+                                    <!-- <img [src]="imgSrc" width="50%" height="150px" (click)="fileUploader.click()" multiple><br> -->
+                                    <label>Select Gallery Image to upload</label><br>
+                                    <input type="file" #fileUploader (change)="galleryImg($event)" multiple name="galleryImage" ngModel><br><br>
+                                </div>
+                                <div class="col-lg-4" *ngFor="let preview of Previews">
+                                    <img [src]="preview" width="50%" height="150px">
+                                </div>
                             </div>
                              <div class="col-lg-12 text-right pl-2 mt-2">
-                                <button class="btn btn-success">Add News</button>
+                                <button class="btn btn-success" type="submit" >Add News</button>
                             </div>
                         </div>
                     </div>

@@ -10,12 +10,16 @@ import { FirebaseService } from '../service/FirebaseService/firebase.service';
 export class CarouselComponent implements OnInit {
   imgSrc : string = 'assets/images/click-image.jpg';
   selectedImage:any = null;
-  imageUrl=[]
+  RecieveCarousel=[]
   imagePath:any
   imageEvent:any
   constructor(public service:FirebaseService) { }
 
   ngOnInit(): void {
+    this.service.getCarousel().subscribe(res=>{
+      this.RecieveCarousel = res
+      console.log(this.RecieveCarousel)
+    })
   }
 
   carouselImg(event){
@@ -42,5 +46,10 @@ export class CarouselComponent implements OnInit {
     this.service.OnAddCarousel(this.imagePath,this.imageEvent)
     data.resetForm()
     this.imgSrc = 'assets/images/click-image.jpg';
+  }
+
+  onDelete(id,path){
+    console.log(id,path)
+    this.service.deleteCarousel(id,path)
   }
 }
