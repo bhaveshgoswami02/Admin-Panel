@@ -41,4 +41,7 @@ export class FirebaseService {
     })
   }
   
+  addNews(coverImg,galleryImg,value){
+    
+  }
 }

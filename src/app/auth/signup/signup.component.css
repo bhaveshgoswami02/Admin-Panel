@@ -1,0 +1,13 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.add-scroll{
+    overflow-y: scroll;
+}
+
+button{
+    padding: 5px 20px;
+    margin-top: 10px;
+}

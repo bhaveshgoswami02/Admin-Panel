@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth, AngularFireAuthModule } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { HeaderService } from '../headerService/header.service';
 
 @Injectable({
   providedIn: 'root'
@@ -9,10 +10,11 @@ import { AngularFirestore } from '@angular/fire/firestore';
 export class AuthService {
   uid=null
   allData=null
-  constructor(public auth:AngularFireAuth,public router:Router, public db:AngularFirestore) { 
+  constructor(public auth:AngularFireAuth,public router:Router, public db:AngularFirestore, public _header:HeaderService) { 
     this.auth.authState.subscribe(res=>{
       if(res){
         this.uid=res.uid
+        this._header.ShowUser.next(true)
         this.router.navigateByUrl("/admin")
       }
     })
@@ -42,6 +44,7 @@ export class AuthService {
 
   isLoggedIn(){
       if(this.uid){
+        this._header.ShowUser.next(true)
         return true
       }
       else
@@ -56,6 +59,7 @@ export class AuthService {
 
   logout(){
     this.router.navigateByUrl("/signin")
+    this._header.ShowUser.next(false)
     this.auth.signOut()
     this.uid=null
   }

@@ -9,7 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./signin.component.css']
 })
 export class SigninComponent implements OnInit {
-  constructor(public auth:AuthService,public router:Router) { }
+  constructor(public auth:AuthService,public router:Router) { 
+    
+  }
 
   ngOnInit(): void {
   }

@@ -9,10 +9,51 @@
             <p style="color: #333; font-weight: 700; font-size: 130%;">DASHBOARD</p>
         </a>
     </li>
-    <li class="nav-item">
+
+    <span *ngIf="ShowUser">
+    <li class="nav-item" style="position: absolute;right: 0;margin-right: 260px;">
+        <a class="nav-link" href="#" data-toggle="dropdown">
+            <svg class="bi bi-caret-down-fill" style="color: #333;" width="20px" height="20px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7.247 11.14L2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+        </a>
+        <div class="dropdown-menu">
+            <a class="dropdown-item" href="#" (click)="onLogOut()">Logout</a>
+        </div>
+    </li>
+
+    <li class="nav-item" style="position: absolute;right: 0;margin-right: 230px;">
         <a class="nav-link" href="#">
-            <button class="btn btn-warning" (click)="onLogOut()">Logout</button>
+            <svg class="bi bi-bell" style="color: #333;" width="20px" height="20px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2z"/>
+                <path fill-rule="evenodd" d="M8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+            </svg>
         </a>
     </li>
 
+    <li class="nav-item" style="position: absolute;right: 0;margin-right: 195px;">
+        <a class="nav-link" href="#">
+            <svg class="bi bi-envelope" style="color: #333;" width="20px" height="20px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" d="M14 3H2a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM2 2a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H2z"/>
+                <path d="M.05 3.555C.017 3.698 0 3.847 0 4v.697l5.803 3.546L0 11.801V12c0 .306.069.596.192.856l6.57-4.027L8 9.586l1.239-.757 6.57 4.027c.122-.26.191-.55.191-.856v-.2l-5.803-3.557L16 4.697V4c0-.153-.017-.302-.05-.445L8 8.414.05 3.555z"/>
+            </svg>
+        </a>
+    </li>
+
+    <li class="nav-item" style="position: absolute;right: 0;margin-right: 145px;">
+        <a class="nav-link" href="#">
+            <svg class="bi bi-person-circle" style="color: #333;" width="30px" height="30px" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+                <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+              </svg>
+        </a>
+    </li>
+
+    <li class="nav-item" style="position: absolute;right: 0;margin-right: 10px;">
+        <a class="nav-link" href="#">
+            <p style="color: #333; font-weight: 700; font-size: 100%;">Welcome Admin</p>
+        </a>
+    </li>
+    </span>
 </ul>
