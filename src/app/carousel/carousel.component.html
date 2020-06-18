@@ -1,0 +1,23 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2 mt-5 ">
+            <p style="border-bottom: 2px solid #333; color: #333; font-size: 20px; font-weight: 700;">Add Carousel</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 mx-auto">
+            <form #imagedata="ngForm" (ngSubmit)="OnUpload(imagedata)">
+                <div class="card mx-auto GalleryAdd my-4">
+                    <div class="card-body">
+                        <div class="text-center my-3">
+                            <img [src]="imgSrc" width="100%" height="250px" (click)="fileUploader.click()">
+                        </div>
+                        <label>Select File to upload</label>
+                        <input type="file" class="form-control pb-5" #fileUploader (change)="carouselImg($event)" name="file" ngModel><br><br>
+                        <button class="btn btn-success" type="submit">Upload</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

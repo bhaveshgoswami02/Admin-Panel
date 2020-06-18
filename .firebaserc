@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "adminpanel12": {
+      "hosting": {
+        "Admin-panel": [
+          "adminpanel12"
+        ]
+      }
+    }
+  }
+}

@@ -117,8 +117,16 @@
               "devServerTarget": "Admin-panel:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
-    }},
-  "defaultProject": "Admin-panel"
+    }
+  },
+  "defaultProject": "Admin-panel",
+  "cli": {
+    "analytics": "0be963b5-8a2c-4ed6-a599-76056b5b69ed"
+  }
 }

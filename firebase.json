@@ -1,0 +1,19 @@
+{
+  "hosting": [
+    {
+      "target": "Admin-panel",
+      "public": "dist/Admin-panel",
+      "ignore": [
+        "firebase.json",
+        "**/.*",
+        "**/node_modules/**"
+      ],
+      "rewrites": [
+        {
+          "source": "**",
+          "destination": "/index.html"
+        }
+      ]
+    }
+  ]
+}

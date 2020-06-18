@@ -1,0 +1,66 @@
+<div class="container mt-5 bg-white rounded p-3">
+    <div class="row">
+        <div class="col-lg-2 mt-5 ">
+            <p style="border-bottom: 2px solid #333; color: #333; font-size: 20px; font-weight: 700;">Add News</p>
+        </div>
+    </div>
+    <div class="col-lg-12">
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Title</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Description</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Gallery</a>
+            </li>
+          </ul>
+          <form>
+            <div class="tab-content mt-3" id="myTabContent">
+                    <div class="tab-pane fade show active card" id="home" role="tabpanel" aria-labelledby="home-tab">
+                        <div class="row p-3">
+                            <div class="col-lg-6">
+                                <label>Title</label>&nbsp;&nbsp;&nbsp;
+                                <input type="text" style="border:none; border-bottom: 1px solid #263544;" placeholder="Enter Title Here">
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="card-body text-center border">
+                                    <h5>Select Cover Image</h5>
+                                    <div class="text-center">
+                                        <img [src]="imgSrc" width="50%" height="150px" (click)="fileUploader.click()">
+                                    </div>
+                                    <label>Select Cover Image to upload</label>
+                                    <input type="file" #fileUploader (change)="coverImg($event)" name="CoverImage" ngModel><br><br>
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-12 text-right pl-2 mt-2">
+                                <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Next >></a>
+                            </div> -->
+                        </div>
+                           
+                    </div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                        <div class="col-lg-12 border p-3">
+                            <h5 style="text-decoration: underline;">Description</h5><br>
+                            <textarea class="form-control" name="Description" cols="30" rows="7"></textarea>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                        <div class="card-body border">
+                            <div class="col-lg-4">
+                                <h5>Select Gallery Image</h5>
+                                <img [src]="imgSrc" width="50%" height="150px" (click)="fileUploader.click()"><br>
+                                <label>Select Gallery Image to upload</label><br>
+                                <input type="file" #fileUploader (change)="coverImg($event)" name="CoverImage" ngModel><br><br>
+                            </div>
+                             <div class="col-lg-12 text-right pl-2 mt-2">
+                                <button class="btn btn-success">Add News</button>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+
+          </form>
+    </div>
+</div>
