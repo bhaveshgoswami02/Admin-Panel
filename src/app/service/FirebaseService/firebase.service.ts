@@ -7,7 +7,10 @@ import { map } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class FirebaseService {
-
+coverPath
+coverURL
+galleryPath
+galleryURL
   constructor(public db:AngularFirestore, public storage: AngularFireStorage) { }
 
   OnAddCarousel(path,event){
@@ -41,7 +44,34 @@ export class FirebaseService {
     })
   }
   
-  addNews(coverImg,galleryImg,value){
-    
+  addNews(coverImg,galleryImg,value,galleryEvent){
+    this.storage.upload(coverImg.CoverImgpath,coverImg.CoverImgEvent).then(res=>{
+      res.ref.getDownloadURL().then(res=>{
+        this.coverPath = coverImg.CoverImgpath
+        this.coverURL = res
+        this.storage.upload(galleryImg,galleryEvent).then(res=>{
+          res.ref.getDownloadURL().then(res=>{
+            this.galleryPath = galleryImg
+            this.galleryURL = res
+            let data = {
+              title:value.title,
+              description:value.Description,
+              coverPath: this.coverPath,
+              coverURL:this.coverURL,
+              galleryPath: this.galleryPath,
+              galleryURL: this.galleryURL
+            }
+            console.log(data)
+            this.db.collection("news").add(data).then(res=>{
+              alert("news save")
+            }).catch(err=>{
+              console.log(err)
+            })
+          
+          })
+        })
+
+      })
+    })
   }
 }
