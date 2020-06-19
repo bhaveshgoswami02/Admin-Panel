@@ -16,8 +16,13 @@ export class NewsComponent implements OnInit {
   GalleryImage=[]
   GalleryEvent=[]
   gallerypath:any
-
-  constructor(public service:FirebaseService) { }
+  news=[]
+  constructor(public service:FirebaseService) {
+    this.service.getNews().subscribe(res=>{
+      console.log(res)
+      this.news = res
+    })
+  }
 
   ngOnInit(): void {
   }
@@ -60,6 +65,7 @@ export class NewsComponent implements OnInit {
           }
       }
       
+      
       // this.GalleryImage = [{path:this.gallerypath,event:event.target.files}]
     }
 
@@ -70,5 +76,9 @@ export class NewsComponent implements OnInit {
       console.log(this.CoverImage, GalleryImgPath, data.value,  this.GalleryEvent)
       this.service.addNews(this.CoverImage,GalleryImgPath,data.value,this.GalleryEvent)
       data.resetForm();
+    }
+
+    onDeleteNews(id,coverPath,galleryPath){
+      this.service.deleteNews(id,coverPath,galleryPath)
     }
 }

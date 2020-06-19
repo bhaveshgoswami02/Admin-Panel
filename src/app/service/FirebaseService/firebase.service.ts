@@ -64,6 +64,7 @@ galleryURL
             console.log(data)
             this.db.collection("news").add(data).then(res=>{
               alert("news save")
+              console.log("news add successful!")
             }).catch(err=>{
               console.log(err)
             })
@@ -72,6 +73,24 @@ galleryURL
         })
 
       })
+    })
+  }
+
+  getNews(){
+    return this.db.collection("news").snapshotChanges().pipe(
+      map(actions => actions.map(a => {
+        const data = a.payload.doc.data() as any;
+        const id = a.payload.doc.id;
+        return { id, ...data };
+      }))
+    )
+  }
+
+  deleteNews(id,coverPath,galleryPath){
+    this.db.collection("news").doc(id).delete().then(res=>{
+      this.storage.ref(coverPath).delete()
+      this.storage.ref(galleryPath).delete()
+      console.log("News Deleted!")
     })
   }
 }

@@ -71,6 +71,37 @@
 
           </form>
     </div>
+
+    <div class="row">
+        <div class="col-lg-2 mt-5">
+            <p style="border-bottom: 2px solid #333; color: #333; font-size: 20px; font-weight: 700;">News List</p>
+        </div>
+    </div>
+
+    <div class="row my-3">
+        <div class="col-lg-12">
+            <table class="table table-responsive-lg">
+                <thead>
+                  <tr>
+                    <th scope="col">Sr. No.</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Cover Image</th>
+                    <th scope="col">Gallery Image</th>
+                    <th scope="col">Delete</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of news;let i = index">
+                    <th scope="row">{{i+1}}</th>
+                    <td>{{item.title}}</td>
+                    <td><img src="{{item.coverURL}}" width="50px" height="50px" style="border-radius: 50%;"></td>
+                    <td><img src="{{item.galleryURL}}" width="50px" height="50px" style="border-radius: 50%;"></td>
+                    <td><button class="btn btn-danger" (click)="onDeleteNews(item.id,item.coverPath,item.galleryPath)" ><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
 </div>
 
 
