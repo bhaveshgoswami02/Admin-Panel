@@ -8,4 +8,5 @@ export class HeaderService {
 
   constructor() { }
   ShowUser = new BehaviorSubject(false);
+  loader = new BehaviorSubject(false);
 }

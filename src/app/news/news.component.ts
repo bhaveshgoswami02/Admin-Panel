@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FirebaseService } from '../service/FirebaseService/firebase.service';
+import { HeaderService } from '../service/headerService/header.service';
 
 @Component({
   selector: 'app-news',
@@ -8,6 +9,7 @@ import { FirebaseService } from '../service/FirebaseService/firebase.service';
   styleUrls: ['./news.component.css']
 })
 export class NewsComponent implements OnInit {
+  loader
   imgSrc : string = 'assets/images/click-image.jpg';
   selectedImage:any = null;
   imageUrl=[]
@@ -17,11 +19,15 @@ export class NewsComponent implements OnInit {
   GalleryEvent=[]
   gallerypath:any
   news=[]
-  constructor(public service:FirebaseService) {
+  constructor(public service:FirebaseService,public _header:HeaderService) {
+    this._header.loader.subscribe(res=>{
+      this.loader = res
+    })
     this.service.getNews().subscribe(res=>{
       console.log(res)
       this.news = res
     })
+
   }
 
   ngOnInit(): void {

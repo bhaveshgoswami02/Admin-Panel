@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { map } from 'rxjs/operators';
+import { HeaderService } from '../headerService/header.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ coverPath
 coverURL
 galleryPath
 galleryURL
-  constructor(public db:AngularFirestore, public storage: AngularFireStorage) { }
+  constructor(public db:AngularFirestore, public storage: AngularFireStorage,public loader:HeaderService) { }
 
   OnAddCarousel(path,event){
     console.log(path,event)
@@ -45,6 +46,7 @@ galleryURL
   }
   
   addNews(coverImg,galleryImg,value,galleryEvent){
+    this.loader.loader.next(true)
     this.storage.upload(coverImg.CoverImgpath,coverImg.CoverImgEvent).then(res=>{
       res.ref.getDownloadURL().then(res=>{
         this.coverPath = coverImg.CoverImgpath
@@ -63,8 +65,9 @@ galleryURL
             }
             console.log(data)
             this.db.collection("news").add(data).then(res=>{
-              alert("news save")
               console.log("news add successful!")
+              this.loader.loader.next(false)
+              alert("news save")
             }).catch(err=>{
               console.log(err)
             })
