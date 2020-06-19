@@ -76,6 +76,10 @@ export class NewsComponent implements OnInit {
       console.log(this.CoverImage, GalleryImgPath, data.value,  this.GalleryEvent)
       this.service.addNews(this.CoverImage,GalleryImgPath,data.value,this.GalleryEvent)
       data.resetForm();
+      this.imgSrc = 'assets/images/click-image.jpg';
+      // let index = 1;
+      // this.Previews.splice(index,1)
+      this.Previews = []
     }
 
     onDeleteNews(id,coverPath,galleryPath){
