@@ -3,8 +3,11 @@
         <div class="col-lg-2 mt-5 ">
             <p style="border-bottom: 2px solid #333; color: #333; font-size: 20px; font-weight: 700;">Add Carousel</p>
         </div>
+        <div class="col-lg-8 text-right mt-5">
+            <button [class]="form == false ? 'btn btn-success' : 'btn btn-warning'" (click)="showForm()">{{form == false ? 'Add Carousel' : 'Cancel'}}</button>
+        </div>
     </div>
-    <div class="row">
+    <div class="row" *ngIf="form">
         <div class="col-lg-6 mx-auto">
             <form #imagedata="ngForm" (ngSubmit)="OnUpload(imagedata)">
                 <div class="card mx-auto GalleryAdd my-4">
@@ -13,14 +16,16 @@
                             <img [src]="imgSrc" width="100%" height="250px" (click)="fileUploader.click()">
                         </div>
                         <label>Select File to upload</label>
-                        <input type="file" class="form-control pb-5" #fileUploader (change)="carouselImg($event)" name="file" ngModel><br><br>
-                        <button class="btn btn-success" type="submit">Upload</button>
+                        <input type="file" class="form-control pb-5" #fileUploader (change)="carouselImg($event)" [disabled]="singleCarousel" required name="file" ngModel><br><br>
+                        <label>Sort</label>
+                        <input type="number" class="form-control" name="sort" placeholder="Enter Sort" required [ngModel]="singleCarousel?.sort"> <br>
+                        <button class="btn btn-success" [disabled]="imagedata.invalid" type="submit">Upload</button>
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    <div class="row my-3">
+    <div class="row my-3" *ngIf="!form">
         <div class="col-lg-12">
             <table class="table table-responsive-lg">
                 <thead>
@@ -28,7 +33,9 @@
                     <th scope="col">Sr. No.</th>
                     <th scope="col">Image</th>
                     <th scope="col">Name</th>
+                    <th scope="col">Sort</th>
                     <th scope="col">Delete</th>
+                    <th scope="col">Edit</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -36,6 +43,8 @@
                     <th scope="row">{{i+1}}</th>
                     <td><img src="{{item.carouselUrl}}" width="50px" height="50px" style="border-radius: 50%;"></td>
                     <td>Carousel {{i+1}}</td>
+                    <td>{{item.sort}}</td>
+                    <td><button class="btn btn-warning" (click)="onEdit(item.id)" ><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
                     <td><button class="btn btn-danger" (click)="onDelete(item.id,item.carouselPath)" ><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
                   </tr>
                 </tbody>

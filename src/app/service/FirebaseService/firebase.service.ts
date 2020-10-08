@@ -14,14 +14,14 @@ galleryPath
 galleryURL
   constructor(public db:AngularFirestore, public storage: AngularFireStorage,public loader:HeaderService) { }
 
-  OnAddCarousel(path,event){
+  OnAddCarousel(path,event,data){
     console.log(path,event)
     this.storage.upload(path,event).then(res=>{
       res.ref.getDownloadURL().then(res=>{
         console.log(res)
         console.log(path)
         let carouselDate = new Date()
-        this.db.collection("carousel").add({date:carouselDate,carouselPath:path,carouselUrl:res}).then(res=>{
+        this.db.collection("carousel").add({date:carouselDate,carouselPath:path,carouselUrl:res,...data}).then(res=>{
           console.log("Carousel Add Successful!")
           alert("Carousel Add Successful!")
         })
@@ -30,13 +30,25 @@ galleryURL
   }
 
   getCarousel(){
-    return this.db.collection("carousel").snapshotChanges().pipe(
+    return this.db.collection("carousel",ref=>ref.orderBy("sort","asc")).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as any;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
     )
+  }
+
+  updateCarousel(id,data){
+    return this.db.collection("carousel").doc(id).update(data).then(res=>{
+      alert("Update Successful!")
+    }).catch(err=>{
+      alert(err)
+    })
+  }
+
+  getSingleCarousel(id){
+    return this.db.collection("carousel").doc(id).valueChanges()
   }
 
   deleteCarousel(id,path){
@@ -57,7 +69,8 @@ galleryURL
             this.galleryURL = res
             let data = {
               title:value.title,
-              description:value.Description,
+              description:value.description,
+              sort:value.sort,
               coverPath: this.coverPath,
               coverURL:this.coverURL,
               galleryPath: this.galleryPath,
@@ -80,13 +93,28 @@ galleryURL
   }
 
   getNews(){
-    return this.db.collection("news").snapshotChanges().pipe(
+    return this.db.collection("news",ref=>ref.orderBy("sort","asc")).snapshotChanges().pipe(
       map(actions => actions.map(a => {
         const data = a.payload.doc.data() as any;
         const id = a.payload.doc.id;
         return { id, ...data };
       }))
     )
+  }
+
+  getNewsById(id){
+    return this.db.collection("news").doc(id).valueChanges()
+  }
+
+  updateNews(id,data){
+    this.loader.loader.next(true)
+    this.db.collection("news").doc(id).update(data).then(res=>{
+      alert("Update Successfull!")
+    }).catch(err=>{
+      alert(err)
+    }).finally(()=>{
+    this.loader.loader.next(false)
+    })
   }
 
   deleteNews(id,coverPath,galleryPath){

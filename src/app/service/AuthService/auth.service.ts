@@ -14,8 +14,8 @@ export class AuthService {
     this.auth.authState.subscribe(res=>{
       if(res){
         this.uid=res.uid
+        localStorage.setItem("uid",res.uid)
         this._header.ShowUser.next(true)
-        this.router.navigateByUrl("/admin")
       }
     })
   }
@@ -23,6 +23,7 @@ export class AuthService {
   OnSignUp(data){
     this.auth.createUserWithEmailAndPassword(data.userEmail,data.userPassword).then(res=>{
       let userid=res.user.uid
+      localStorage.setItem("uid",this.uid)
       this.allData={userid,...data}
       this.db.collection("userData").add(this.allData)
       this.uid=res.user.uid
@@ -36,6 +37,7 @@ export class AuthService {
   OnSignIn(data){
     this.auth.signInWithEmailAndPassword(data.userEmail,data.userPassword).then(res=>{
       this.uid=res.user.uid
+      localStorage.setItem("uid",this.uid)
       this.router.navigateByUrl("/admin")
     }).catch(err=>{
       alert(err)
@@ -43,7 +45,7 @@ export class AuthService {
   }
 
   isLoggedIn(){
-      if(this.uid){
+      if(localStorage.getItem("uid")){
         this._header.ShowUser.next(true)
         return true
       }
@@ -54,7 +56,7 @@ export class AuthService {
   }
 
   getUid(){
-    return this.uid
+    return localStorage.getItem("uid")
   }
 
   logout(){
@@ -62,5 +64,6 @@ export class AuthService {
     this._header.ShowUser.next(false)
     this.auth.signOut()
     this.uid=null
+    localStorage.removeItem("uid")
   }
 }

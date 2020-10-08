@@ -1,13 +1,13 @@
 export const environment = {
   production: true,
   firebase: {
-    apiKey: "AIzaSyAIgSKRY00qHlV7U6r0iaNs1f8PKn1SxIw",
-    authDomain: "adminpanel12.firebaseapp.com",
-    databaseURL: "https://adminpanel12.firebaseio.com",
-    projectId: "adminpanel12",
-    storageBucket: "adminpanel12.appspot.com",
-    messagingSenderId: "558171434430",
-    appId: "1:558171434430:web:d28507cf9de46fcebb1def",
-    measurementId: "G-JN2S9VZB54"
+    apiKey: "AIzaSyDfrmKHTxHnVlEQHWMuFlO21preLMt9HXU",
+    authDomain: "ctae-alumni.firebaseapp.com",
+    databaseURL: "https://ctae-alumni.firebaseio.com",
+    projectId: "ctae-alumni",
+    storageBucket: "ctae-alumni.appspot.com",
+    messagingSenderId: "184361186212",
+    appId: "1:184361186212:web:71cf58cf1e95703ba78731",
+    measurementId: "G-4V30JSM484"
   }
 };

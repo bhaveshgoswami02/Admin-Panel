@@ -8,8 +8,11 @@
         <div class="col-lg-2 mt-5">
             <p style="border-bottom: 2px solid #333; color: #333; font-size: 20px; font-weight: 700;">Add News</p>
         </div>
+        <div class="col-lg-8 text-right mt-5">
+            <button [class]="form == false ? 'btn btn-success' : 'btn btn-warning'" (click)="showForm()">{{form == false ? 'Add News' : 'Cancel'}}</button>
+        </div>
     </div>
-    <div class="col-lg-12 mt-5 p-3 bg-white rounded">
+    <div class="col-lg-12 mt-5 p-3 bg-white rounded" *ngIf="form">
         <ul class="nav nav-tabs" id="myTab" role="tablist">
             <li class="nav-item" role="presentation">
               <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Title</a>
@@ -27,7 +30,11 @@
                         <div class="row p-3">
                             <div class="col-lg-6">
                                 <label>Title</label>&nbsp;&nbsp;&nbsp;
-                                <input type="text" style="border:none; border-bottom: 1px solid #263544;" placeholder="Enter Title Here" name="title" ngModel>
+                                <input type="text" style="border:none; border-bottom: 1px solid #263544;" placeholder="Enter Title Here" name="title" [ngModel]="singleNewsData?.title"> <br><br>
+                                <br>
+                                <br>
+                                <label>Sort</label>&nbsp;&nbsp;&nbsp;
+                                <input type="number" style="border:none; border-bottom: 1px solid #263544;" placeholder="Enter sort" name="sort" [ngModel]="singleNewsData?.sort">
                             </div>
                             <div class="col-lg-6">
                                 <div class="card-body text-center border">
@@ -36,7 +43,7 @@
                                         <img [src]="imgSrc" width="50%" height="150px" (click)="fileUploader.click()">
                                     </div>
                                     <label>Select Cover Image to upload</label>
-                                    <input type="file" #fileUploader (change)="coverImg($event)" name="CoverImage" ngModel><br><br>
+                                    <input type="file" [disabled]="singleNewsData" #fileUploader (change)="coverImg($event)" name="CoverImage" ngModel><br><br>
                                 </div>
                             </div>
                             <!-- <div class="col-lg-12 text-right pl-2 mt-2">
@@ -50,7 +57,7 @@
                         <div class="col-lg-12 border p-3">
                             <h5 style="text-decoration: underline;">Description</h5><br>
                             <!-- <textarea class="form-control" name="Description" cols="30" rows="7" ngModel></textarea> -->
-                            <ckeditor data="" name="Description" ngModel></ckeditor>
+                            <ckeditor name="description" [ngModel]="singleNewsData?.description"></ckeditor>
                         </div>
                     </div>
                     <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
@@ -60,7 +67,7 @@
                                     <h5>Select Gallery Image</h5>
                                     <!-- <img [src]="imgSrc" width="50%" height="150px" (click)="fileUploader.click()" multiple><br> -->
                                     <label>Select Gallery Image to upload</label><br>
-                                    <input type="file" #fileUploader (change)="galleryImg($event)" multiple name="galleryImage" ngModel><br><br>
+                                    <input type="file" [disabled]="singleNewsData" #fileUploader (change)="galleryImg($event)" multiple name="galleryImage" ngModel><br><br>
                                 </div>
                                 <div class="col-lg-4" *ngFor="let preview of Previews">
                                     <img [src]="preview" width="50%" height="150px">
@@ -78,19 +85,20 @@
           </form>
     </div>
 
-    <div class="row">
+    <div class="row" *ngIf="!form">
         <div class="col-lg-2 mt-5">
             <p style="border-bottom: 2px solid #333; color: #333; font-size: 20px; font-weight: 700;">News List</p>
         </div>
     </div>
 
-    <div class="row my-3">
+    <div class="row my-3" *ngIf="!form">
         <div class="col-lg-12">
             <table class="table table-responsive-lg">
                 <thead>
                   <tr>
                     <th scope="col">Sr. No.</th>
                     <th scope="col">Title</th>
+                    <th scope="col">Sort</th>
                     <th scope="col">Cover Image</th>
                     <th scope="col">Gallery Image</th>
                     <th scope="col">Delete</th>
@@ -100,8 +108,10 @@
                   <tr *ngFor="let item of news;let i = index">
                     <th scope="row">{{i+1}}</th>
                     <td>{{item.title}}</td>
+                    <td>{{item.sort}}</td>
                     <td><img src="{{item.coverURL}}" width="50px" height="50px" style="border-radius: 50%;"></td>
                     <td><img src="{{item.galleryURL}}" width="50px" height="50px" style="border-radius: 50%;"></td>
+                    <td><button class="btn btn-warning" (click)="onEditNews(item.id)" ><i class="fa fa-pencil" aria-hidden="true"></i></button></td>
                     <td><button class="btn btn-danger" (click)="onDeleteNews(item.id,item.coverPath,item.galleryPath)" ><i class="fa fa-trash-o" aria-hidden="true"></i></button></td>
                   </tr>
                 </tbody>

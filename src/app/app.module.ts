@@ -19,6 +19,7 @@ import { AdminComponent } from './admin/admin.component';
 import { HomeComponent } from './admin/home/home.component';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { CKEditorModule } from 'ckeditor4-angular';
+import { NewPageComponent } from './new-page/new-page.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CKEditorModule } from 'ckeditor4-angular';
     SignupComponent,
     AdminComponent,
     HomeComponent,
+    NewPageComponent,
   ],
   imports: [
     BrowserModule,
